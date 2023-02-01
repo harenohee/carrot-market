@@ -1,8 +1,8 @@
 export default function Home() {
 	return (
-		<div className="bg-slate-400 py-20 px-20 grid gap-10 lg:grid-cols-2 xl:grid-cols-3 min-h-screen">
+		<div className="bg-slate-400 xl:place-content-center py-20 px-20 grid gap-10 lg:grid-cols-2 xl:grid-cols-3 min-h-screen">
 			{/*  sm:bg-red-400만 있을때, 가장 최근의 설정이 적용되기 때문에 큰화면일 때 흰색이 아니게됨 */}
-			<div className="bg-white sm:bg-red-400 md:bg-teal-500 xl:bg-yellow-500 p-6 rounded-3xl shadow-xl">
+			<div className="bg-white flex flex-col justify-between sm:bg-red-400 md:bg-teal-500 xl:bg-yellow-500 p-6 rounded-3xl shadow-xl">
 				<span className="font-semibold text-3xl">Select Item</span>
 				<ul>
 					{[1, 2, 3, 4, 5].map((i) => (
@@ -14,11 +14,11 @@ export default function Home() {
 							<span className="font-semibold">$19</span>
 						</div>
 					))}
-					{['a', 'b', 'c', ''].map((c, i) => (
+					{/* {['a', 'b', 'c', ''].map((c, i) => (
 						<li key={i} className="bg-red-50 py-2 empty:hidden">
 							{c}
 						</li>
-					))}
+					))} */}
 				</ul>
 				<div className="flex justify-between mt-2 pt-2 border-t-2 border-dashed">
 					<span>Total</span>
@@ -26,7 +26,7 @@ export default function Home() {
 				</div>
 				<div className="flex justify-center items-center">
 					<button
-						className="mt-5 bg-blue-500 text-white p-3 text-center rounded-xl w-1/2 mx-auto
+						className="mt-5 bg-blue-500  text-white p-3 text-center rounded-xl w-1/2 mx-auto
           hover:bg-teal-500 hover:text-black active:bg-yellow-500 focus:text-gray-500"
 					>
 						Checkout
@@ -34,7 +34,7 @@ export default function Home() {
 				</div>
 			</div>
 			<div className="bg-white overflow-hidden rounded-3xl shadow-xl group">
-				<div className="bg-blue-500 p-6 pb-14">
+				<div className="bg-blue-500 portrait:bg-indigo-400 landscape:bg-teal-500 p-6 pb-14 xl:pb-52">
 					<span className="text-white text-2xl">Profile</span>
 				</div>
 				<div className="rounded-3xl p-6 bg-white relative -top-5">
