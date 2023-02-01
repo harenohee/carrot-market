@@ -7,7 +7,7 @@ export default function Home() {
           {[1, 2, 3, 4, 5].map((i) => (
             <div
               key={i}
-              className="flex justify-between my-2 first:bg-blue-50 last:bg-blue-50 only:bg-red-50"
+              className="flex justify-between my-2 odd:bg-blue-50 even: bg-yellow-50"
             >
               <span className="text-gray-500">Grey Chair</span>
               <span className="font-semibold">$19</span>
