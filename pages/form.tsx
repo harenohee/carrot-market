@@ -1,16 +1,12 @@
 export default function Form() {
 	return (
-		<form className="flex flex-col space-y-2 p-5">
-			<input
-				type="text"
-				required
-				placeholder="UserName"
-				className="peer border p-1 border-gray-400"
-			/>
-			<span className="hidden peer-invalid:block text-red-500">
-				입력란을 작성해주세요.
-			</span>
-			<button>로그인</button>
-		</form>
+		<div className="flex flex-col space-y-2 p-5">
+			<details>
+				<summary className="select-none cursor-pointer">
+					What is my fav. food?
+				</summary>
+				<span className="selection:bg-indigo-500">김추ㅣ</span>
+			</details>
+		</div>
 	)
 }
