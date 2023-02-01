@@ -1,8 +1,8 @@
 export default function Home() {
 	return (
-		<div className="bg-slate-400 py-20 px-20 grid gap-10 min-h-screen">
+		<div className="bg-slate-400 py-20 px-20 grid gap-10 lg:grid-cols-2 xl:grid-cols-3 min-h-screen">
 			{/*  sm:bg-red-400만 있을때, 가장 최근의 설정이 적용되기 때문에 큰화면일 때 흰색이 아니게됨 */}
-			<div className="bg-white sm:hover:bg-pink-300 sm:bg-red-400 md:bg-teal-500 xl:bg-yellow-500 p-6 rounded-3xl shadow-xl">
+			<div className="bg-white sm:bg-red-400 md:bg-teal-500 xl:bg-yellow-500 p-6 rounded-3xl shadow-xl">
 				<span className="font-semibold text-3xl">Select Item</span>
 				<ul>
 					{[1, 2, 3, 4, 5].map((i) => (
@@ -55,7 +55,7 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
-			<div className="bg-white p-10 rounded-3xl shadow-xl">
+			<div className="bg-white p-10 rounded-3xl shadow-xl lg:col-span-2 xl:col-span-1">
 				<div className="flex mb-5 justify-between items-center">
 					<span>⬅️</span>
 					<div className="space-x-3">
