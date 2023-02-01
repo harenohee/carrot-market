@@ -5,3 +5,4 @@ export default function Home() {
     </div>
   );
 }
+// 커밋 템플릿 테스팅
