@@ -18,10 +18,10 @@ export default function Enter() {
 				<div className="grid border-b w-full pb-4  mt-8 grid-cols-2 gap-16">
 					<button
 						className={cls(
-							'pb-4 font-medium ',
+							'pb-4 font-medium border-b-2',
 							method === 'email'
-								? 'border-b-2 border-orange-500  text-orange-400 '
-								: '',
+								? ' border-orange-500  text-orange-400 '
+								: 'border-transparent text-[gray]',
 						)}
 						onClick={onEmailClick}
 					>
@@ -29,10 +29,10 @@ export default function Enter() {
 					</button>
 					<button
 						className={cls(
-							'pb-4 font-medium',
+							'pb-4 font-medium border-b-2',
 							method === 'phone'
-								? 'border-b-2 border-orange-500  text-orange-400 '
-								: '',
+								? ' border-orange-500  text-orange-400 '
+								: 'border-transparent text-[gray]',
 						)}
 						onClick={onPhoneClick}
 					>
