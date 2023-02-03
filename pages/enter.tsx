@@ -1,5 +1,11 @@
 import { useState } from 'react'
 
+// rest 파라미터 - 무한으로 받을 수 있음.
+function cls(...classNames: string[]) {
+	return classNames.join(' ')
+	// [1,2,3].join("/") => "1/2/3"
+}
+
 export default function Enter() {
 	const [method, setMethod] = useState<'email' | 'phone'>('email')
 	const onEmailClick = () => setMethod('email')
@@ -11,21 +17,23 @@ export default function Enter() {
 				<h5 className="text-sm text-gray-500 font-medium">Enter using:</h5>
 				<div className="grid border-b w-full pb-4  mt-8 grid-cols-2 gap-16">
 					<button
-						className={`pb-4 font-medium ${
+						className={cls(
+							'pb-4 font-medium ',
 							method === 'email'
 								? 'border-b-2 border-orange-500  text-orange-400 '
-								: ''
-						}`}
+								: '',
+						)}
 						onClick={onEmailClick}
 					>
 						Email
 					</button>
 					<button
-						className={`pb-4 font-medium ${
+						className={cls(
+							'pb-4 font-medium',
 							method === 'phone'
 								? 'border-b-2 border-orange-500  text-orange-400 '
-								: ''
-						}`}
+								: '',
+						)}
 						onClick={onPhoneClick}
 					>
 						Phone
