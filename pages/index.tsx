@@ -1,6 +1,6 @@
 export default function Home() {
 	return (
-		<div className="bg-slate-400  xl:place-content-center py-20 px-20 grid gap-10 lg:grid-cols-2 xl:grid-cols-3 min-h-screen">
+		<div className="bg-slate-400 xl:place-content-center py-20 px-20 grid gap-10 lg:grid-cols-2 xl:grid-cols-3 min-h-screen">
 			{/*  sm:bg-red-400만 있을때, 가장 최근의 설정이 적용되기 때문에 큰화면일 때 흰색이 아니게됨 */}
 			<div className="bg-white dark:bg-black flex flex-col justify-between sm:bg-red-400 md:bg-teal-500 xl:bg-yellow-500 p-6 rounded-3xl shadow-xl">
 				<span className="font-semibold dark:text-white text-3xl">
@@ -45,7 +45,7 @@ export default function Home() {
 							<span className="text-sm text-gray-500">Orders</span>
 							<span className="font-medium">340</span>
 						</div>
-						<div className="h-24 w-24 bg-red-400 rounded-full group-hover:bg-gray-400 transition-colors" />
+						<div className="h-24 w-24 bg-red-400 rounded-full group-hover:bg-gray-400 transition-colors bg-[url('/vercel.svg')]" />
 						<div className="flex flex-col items-center">
 							<span className="text-sm text-gray-500">Spent</span>
 							<span className="font-medium">$2,310</span>
@@ -86,7 +86,7 @@ export default function Home() {
 						</div>
 					</div>
 					<div className="flex justify-between items-center ">
-						<span className="font-medium text-[800px]">$460</span>
+						<span className="font-medium text-2xl">$460</span>
 						<button className="bg-blue-500 py-2 px-8 text-center text-white rounded-lg">
 							Add to cart
 						</button>
