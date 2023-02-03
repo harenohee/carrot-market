@@ -54,13 +54,20 @@ export default function Enter() {
 						/>
 					) : null}
 					{method === 'phone' ? (
-						<div>
-							<span>+82</span>
-							<input type="number" required />
+						// +82도 인풋에 속한 것처럼 느껴지도록 하기
+						<div className="flex rounded-md shadow-sm">
+							<span className="flex items-center justify-center px-3 rounded-l-md border-r-0 border border-gray-300 bg-gray-50 text-gray-500 selection:none">
+								+82
+							</span>
+							<input
+								type="number"
+								className="appearance-none w-full px-3 py-2 border border-gray-300 rounded-md rounded-l-none shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+								required
+							/>
 						</div>
 					) : null}
 				</div>
-				<button className="bg-orange-400 hover:bg-orange-600 text-white py-2 border border-transparent rounded-md shadow-sm text-sm font-medium">
+				<button className="mt-8 bg-orange-400 hover:bg-orange-600 text-white py-2 border border-transparent rounded-md shadow-sm text-sm font-medium focus:ring-2 focus:outline-none ring-offset-2 ring-orange-500">
 					{method === 'email' ? 'Get login link' : null}
 					{method === 'phone' ? 'Get one-time password' : null}
 				</button>
