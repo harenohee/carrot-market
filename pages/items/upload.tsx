@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 
 const Upload: NextPage = () => {
 	return (
-		<div className="px-4 py-16">
+		<div className="px-4 space-y-5 py-16">
 			<div>
 				{/* flex py 대신에 h 쓰기 */}
 				<label className="w-full flex text-gray-400 items-center justify-center border-2 border-dashed border-gray-400 h-48 rounded-md hover:border-orange-400 hover:text-orange-400">
@@ -25,6 +25,22 @@ const Upload: NextPage = () => {
 				</label>
 			</div>
 			<div className="mt-4 mb-6">
+				<div>
+					<label
+						className="mb-1 block text-sm font-medium text-gray-700"
+						htmlFor="name"
+					>
+						Name
+					</label>
+					<div className="rounded-md relative flex  items-center shadow-sm">
+						<input
+							id="name"
+							type="email"
+							className="appearance-none w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+							required
+						/>
+					</div>
+				</div>
 				<label
 					htmlFor="price"
 					className="text-sm font-medium text-[gray] mb-1 block"
@@ -60,8 +76,8 @@ const Upload: NextPage = () => {
 					/>
 				</div>
 			</div>
-			<button className="mt-2 w-full bg-orange-500 text-white py-3 rounded-md focus:outline-none focus:ring-2 ring-offset-2 ring-orange-400 font-medium hover:bg-orange-600">
-				Upload product
+			<button className=" w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none ">
+				Upload item
 			</button>
 		</div>
 	)
