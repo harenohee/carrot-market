@@ -7,7 +7,7 @@ export default async function handler(
 ) {
 	await client.user.create({
 		data: {
-			email: 'hi',
+			email: 'nog',
 			name: 'hi',
 		},
 	})
@@ -15,3 +15,4 @@ export default async function handler(
 		ok: true,
 	})
 }
+// 호스팅 중인 api 라우트를 통해 데이터베이스 수정이 가능
