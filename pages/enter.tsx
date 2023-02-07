@@ -1,10 +1,10 @@
 import { useState } from 'react'
-
+import { cls } from '@/libs/utils'
 // rest 파라미터 - 무한으로 받을 수 있음.
-function cls(...classNames: string[]) {
-	return classNames.join(' ')
-	// [1,2,3].join("/") => "1/2/3"
-}
+// function cls(...classNames: string[]) {
+// 	return classNames.join(' ')
+// 	// [1,2,3].join("/") => "1/2/3"
+// }
 
 export default function Enter() {
 	const [method, setMethod] = useState<'email' | 'phone'>('email')
