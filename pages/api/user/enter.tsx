@@ -9,24 +9,26 @@ import { NextApiRequest, NextApiResponse } from 'next'
 // create -> Promise를 반환 -> async await
 async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const { phone, email } = req.body
-
-	const user = await client.user.upsert({
-		// 1. 같은 번호를 갖고있는 유저를 찾고
-		where: {
-			// es6문법
-			...(phone && { phone: +phone }),
-			...(email && { email }),
+	const user = phone ? { phone: +phone } : { email }
+	const payload = Math.floor(10000 + Math.random() * 900000) + ''
+	// where문: user가 있는 경우 token과 연결
+	// create: 없으면 user 생성, token 연결
+	const token = await client.token.create({
+		data: {
+			payload,
+			user: {
+				connectOrCreate: {
+					where: {
+						...user,
+					},
+					create: {
+						name: 'Anonymous',
+						...user,
+					},
+				},
+			},
 		},
-		// 2. 없으면 생성
-		create: {
-			name: 'Anonymous',
-			...(phone && { phone: +phone }),
-			...(email && { email }),
-		},
-		// 3. 업데이트
-		update: {},
 	})
-
 	return res.status(200).end()
 }
 // pages 경로에 api 폴더를 생성함으로써 api서버가 생성됨
