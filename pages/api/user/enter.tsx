@@ -1,3 +1,4 @@
+import client from '@/libs/server/client'
 import withHandler from '@/libs/server/withHandler'
 import { NextApiRequest, NextApiResponse } from 'next'
 // nextJS에서 api route를 할때는 그 function을 export default해야한다
@@ -7,7 +8,34 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 // create -> Promise를 반환 -> async await
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-	console.log(req.body)
+	const { phone, email } = req.body
+	let user
+	if (email) {
+		user = await client.user.findUnique({
+			where: { email: email },
+		})
+		if (user) console.log('유저 확인')
+		if (!user) {
+			console.log('유저 생성')
+			user = await client.user.create({
+				data: { name: 'Anonymous', email: email }, // 유저를 특정할 수 있는 데이터
+			})
+		}
+		console.log(user)
+	}
+	if (phone) {
+		user = await client.user.findUnique({
+			where: { phone: +phone },
+		})
+		if (user) console.log('유저 확인')
+		if (!user) {
+			console.log('유저 생성')
+			user = await client.user.create({
+				data: { name: 'Anonymous', phone: +phone }, // 유저를 특정할 수 있는 데이터
+			})
+		}
+		console.log(user)
+	}
 	return res.status(200).end()
 }
 // pages 경로에 api 폴더를 생성함으로써 api서버가 생성됨
