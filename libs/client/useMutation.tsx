@@ -26,8 +26,10 @@ export default function useMutation(
 			//response.json() return: Promise를 return
 			//다시 then을 통해 json만 가져온다
 		})
-			.then((response) => response.json())
+			.then((response) => response.json().catch(() => {})) // 때때로 동작안할수 있으므로 catch
 			.then(setData)
+			.catch(setError)
+			.finally(() => setLoading(false))
 	}
 	return [mutation, { loading, data, error }]
 }
