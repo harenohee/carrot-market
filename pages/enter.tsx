@@ -12,6 +12,8 @@ interface EnterForm {
 }
 
 const Enter: NextPage = () => {
+	const [loading, setLoading] = useState(false)
+	// register : input 과 state를 연결시켜주는 역할
 	const { register, watch, handleSubmit, reset } = useForm<EnterForm>()
 	const [method, setMethod] = useState<'email' | 'phone'>('email')
 	const onEmailClick = () => {
@@ -24,7 +26,16 @@ const Enter: NextPage = () => {
 
 	// submitHandler
 	const onValid = (data: EnterForm) => {
-		console.log(data)
+		setLoading(true)
+		fetch('/api/user/enter', {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}).then(() => {
+			setLoading(false)
+		})
 	}
 	return (
 		<div className="mt-16 px-4">
@@ -84,9 +95,11 @@ const Enter: NextPage = () => {
 							required
 						/>
 					) : null}
-					{method === 'email' ? <Button text={'Get login link'} /> : null}
+					{method === 'email' ? (
+						<Button text={loading ? 'Loading' : 'Get login link'} />
+					) : null}
 					{method === 'phone' ? (
-						<Button text={'Get one-time password'} />
+						<Button text={loading ? 'Loading' : 'Get one-time password'} />
 					) : null}
 				</form>
 
