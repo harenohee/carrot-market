@@ -9,33 +9,24 @@ import { NextApiRequest, NextApiResponse } from 'next'
 // create -> Promise를 반환 -> async await
 async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const { phone, email } = req.body
-	let user
-	if (email) {
-		user = await client.user.findUnique({
-			where: { email: email },
-		})
-		if (user) console.log('유저 확인')
-		if (!user) {
-			console.log('유저 생성')
-			user = await client.user.create({
-				data: { name: 'Anonymous', email: email }, // 유저를 특정할 수 있는 데이터
-			})
-		}
-		console.log(user)
-	}
-	if (phone) {
-		user = await client.user.findUnique({
-			where: { phone: +phone },
-		})
-		if (user) console.log('유저 확인')
-		if (!user) {
-			console.log('유저 생성')
-			user = await client.user.create({
-				data: { name: 'Anonymous', phone: +phone }, // 유저를 특정할 수 있는 데이터
-			})
-		}
-		console.log(user)
-	}
+
+	const user = await client.user.upsert({
+		// 1. 같은 번호를 갖고있는 유저를 찾고
+		where: {
+			// es6문법
+			...(phone && { phone: +phone }),
+			...(email && { email }),
+		},
+		// 2. 없으면 생성
+		create: {
+			name: 'Anonymous',
+			...(phone && { phone: +phone }),
+			...(email && { email }),
+		},
+		// 3. 업데이트
+		update: {},
+	})
+
 	return res.status(200).end()
 }
 // pages 경로에 api 폴더를 생성함으로써 api서버가 생성됨
