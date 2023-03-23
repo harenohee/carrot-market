@@ -11,12 +11,16 @@ export default function useMutation(
 	// function, state을 return
 	// 타입스크립트: return 타입 명시 필수
 	//return 타입: array (2개의 item; 함수,object)
-	const [loading, setLoading] = useState(false)
-	const [data, setData] = useState<undefined | any>(undefined)
-	const [error, setError] = useState<undefined | any>(undefined)
-
+	// const [loading, setLoading] = useState(false)
+	// const [data, setData] = useState<undefined | any>(undefined)
+	// const [error, setError] = useState<undefined | any>(undefined)
+	const [state, setState] = useState({
+		loading: false,
+		data: undefined,
+		error: undefined,
+	})
 	function mutation(data?: any) {
-		setLoading(true)
+		setState((prev) => ({ ...prev, loading: true }))
 		fetch(url, {
 			method: 'POST',
 			headers: {
@@ -27,9 +31,9 @@ export default function useMutation(
 			//다시 then을 통해 json만 가져온다
 		})
 			.then((response) => response.json().catch(() => {})) // 때때로 동작안할수 있으므로 catch
-			.then(setData)
-			.catch(setError)
-			.finally(() => setLoading(false))
+			.then((data) => setState((prev) => ({ ...prev, data: data })))
+			.catch((error) => setState((prev) => ({ ...prev, error })))
+			.finally(() => setState((prev) => ({ ...prev, loading: false })))
 	}
-	return [mutation, { loading, data, error }]
+	return [mutation, { ...state }]
 }
