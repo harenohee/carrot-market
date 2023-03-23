@@ -27,7 +27,7 @@ export default function useMutation(
 			//다시 then을 통해 json만 가져온다
 		})
 			.then((response) => response.json())
-			.then((json) => setData(json))
+			.then(setData)
 	}
 	return [mutation, { loading, data, error }]
 }
