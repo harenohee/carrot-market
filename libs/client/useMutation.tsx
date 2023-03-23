@@ -15,6 +15,19 @@ export default function useMutation(
 	const [data, setData] = useState<undefined | any>(undefined)
 	const [error, setError] = useState<undefined | any>(undefined)
 
-	function mutation(data?: any) {}
+	function mutation(data?: any) {
+		setLoading(true)
+		fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+			//response.json() return: Promise를 return
+			//다시 then을 통해 json만 가져온다
+		})
+			.then((response) => response.json())
+			.then((json) => setData(json))
+	}
 	return [mutation, { loading, data, error }]
 }
