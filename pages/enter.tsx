@@ -1,10 +1,11 @@
+import useMutation from '@/libs/client/useMutation'
 import type { NextPage } from 'next'
 import React from 'react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Button from '../components/button'
 import Input from '../components/input'
-import { cls } from '../libs/utils'
+import { cls } from '../libs/client/utils'
 
 interface EnterForm {
 	email?: string
@@ -12,7 +13,12 @@ interface EnterForm {
 }
 
 const Enter: NextPage = () => {
-	const [loading, setLoading] = useState(false)
+	// useMutation으로부터 array를 받음
+	// 첫번째 item : 호출 함수 (백엔드로 POST fetch하는 역할 수행) <- mutation 트리거 함수
+	// 데이터를 백엔드로 POST => db 상태를 mutate : mutation
+	// 📌useMutation은 어떤 urldmf mutate할지 알아야 한다
+	const [enter, { loading, data, error }] = useMutation('/api/user/enter')
+	const [submitting, setSubmitting] = useState(false)
 	// register : input 과 state를 연결시켜주는 역할
 	const { register, watch, handleSubmit, reset } = useForm<EnterForm>()
 	const [method, setMethod] = useState<'email' | 'phone'>('email')
@@ -26,16 +32,7 @@ const Enter: NextPage = () => {
 
 	// submitHandler
 	const onValid = (data: EnterForm) => {
-		setLoading(true)
-		fetch('/api/user/enter', {
-			method: 'POST',
-			body: JSON.stringify(data),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		}).then(() => {
-			setLoading(false)
-		})
+		enter(data)
 	}
 	return (
 		<div className="mt-16 px-4">
@@ -96,10 +93,10 @@ const Enter: NextPage = () => {
 						/>
 					) : null}
 					{method === 'email' ? (
-						<Button text={loading ? 'Loading' : 'Get login link'} />
+						<Button text={submitting ? 'Loading' : 'Get login link'} />
 					) : null}
 					{method === 'phone' ? (
-						<Button text={loading ? 'Loading' : 'Get one-time password'} />
+						<Button text={submitting ? 'Loading' : 'Get one-time password'} />
 					) : null}
 				</form>
 
