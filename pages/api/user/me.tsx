@@ -7,6 +7,18 @@ async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<ResponseType>,
 ) {
-	res.status(200).end()
+	const profile = await client.user.findUnique({
+		where: { id: req.session.user?.id },
+	})
+	res.json({
+		ok: true,
+		profile,
+	})
 }
-export default withApiSession(withHandler('GET', handler, true)) //withHandler의 return 함수로 대치됨
+export default withApiSession(
+	withHandler({
+		method: 'GET', //2개 이상의 인자를 받게 됨으로 객체로 변경
+		handler,
+		isPrivate: true,
+	}),
+) //withHandler의 return 함수로 대치됨
