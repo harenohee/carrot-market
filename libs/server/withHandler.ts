@@ -8,12 +8,19 @@ export interface ResponseType {
 export default function withHandler(
 	method: 'GET' | 'POST' | 'DELETE',
 	fn: (req: NextApiRequest, res: NextApiResponse) => void,
+	isPrivate: boolean,
 ) {
 	// nextJS가 실행해야 할 것을 return 해야함
 	// 그 함수를 커스터마이징하는 것 뿐
 	return async function (req: NextApiRequest, res: NextApiResponse) {
 		if (req.method !== method) {
 			return res.status(405).end()
+		}
+		if (isPrivate && !req.session.user) {
+			return res.status(401).json({
+				ok: false,
+				error: 'plz login',
+			})
 		}
 		try {
 			await fn(req, res)
