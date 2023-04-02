@@ -17,7 +17,7 @@ async function handler(
 }
 export default withApiSession(
 	withHandler({
-		method: 'GET', //2개 이상의 인자를 받게 됨으로 객체로 변경
+		methods: ['GET'], //2개 이상의 인자를 받게 됨으로 객체로 변경
 		handler,
 		isPrivate: true,
 	}),
